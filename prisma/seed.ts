@@ -1,17 +1,5 @@
 import "dotenv/config";
-import { PrismaClient } from "../generated/prisma/client";
-import { PrismaMariaDb } from "@prisma/adapter-mariadb";
-
-const databaseUrl = new URL(process.env.DATABASE_URL as string);
-const adapter = new PrismaMariaDb({
-  host: databaseUrl.hostname,
-  port: Number(databaseUrl.port || 3306),
-  user: databaseUrl.username,
-  password: decodeURIComponent(databaseUrl.password),
-  database: databaseUrl.pathname.replace("/", ""),
-});
-
-const prisma = new PrismaClient({ adapter });
+import { prisma } from "../app.js";
 
 const woods = [
   { name: "Épicéa", type: "softwood", hardness: "tender" },
@@ -42,7 +30,7 @@ async function main() {
       firstName: "Admin",
       lastName: "User",
       email: "admin@example.com",
-      password: "admin123", 
+      password: "admin123",
     },
   });
   console.log("Seeded 1 user.");

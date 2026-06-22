@@ -8,7 +8,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec tsx server.js"
+    "dev": "nodemon --exec tsx server.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "entry": "server.js",
   "dependencies": {
@@ -19,6 +21,7 @@
     "mariadb": "^3.5.3"
   },
   "devDependencies": {
+    "prettier": "^3.8.4",
     "prisma": "^7.8.0",
     "tsx": "^4.22.4"
   }
