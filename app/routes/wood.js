@@ -1,7 +1,7 @@
 import express from "express";
 const router = express();
 
-router.get("/woods", function (req, res) {
+router.get("/", function (req, res) {
   res.send("List of woods");
 });
 
