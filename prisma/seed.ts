@@ -1,4 +1,5 @@
 import "dotenv/config";
+import bcrypt from "bcrypt";
 import { prisma } from "../app.js";
 
 const woods = [
@@ -23,6 +24,7 @@ async function main() {
   }
   console.log(`Seeded ${woods.length} woods.`);
 
+  const hashedPassword = await bcrypt.hash("admin123", 10);
   await prisma.user.upsert({
     where: { email: "admin@example.com" },
     update: {},
@@ -30,7 +32,7 @@ async function main() {
       firstName: "Admin",
       lastName: "User",
       email: "admin@example.com",
-      password: "admin123",
+      password: hashedPassword,
     },
   });
   console.log("Seeded 1 user.");
