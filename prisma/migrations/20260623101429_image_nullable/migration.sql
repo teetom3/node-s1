@@ -1,0 +1,1 @@
+ALTER TABLE `wood` MODIFY `image` VARCHAR(191) NULL;
