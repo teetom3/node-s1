@@ -1,8 +1,9 @@
 import express from "express";
-import { woods } from "../controllers/wood.js";
+import { findAll, findByHardness } from "../controllers/wood.js";
 
 const router = express();
 
-router.get("/", woods);
+router.get("/", findAll);
+router.get("/hardness/:hardness", findByHardness);
 
 export default router;
