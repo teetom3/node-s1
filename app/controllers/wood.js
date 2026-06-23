@@ -16,9 +16,6 @@ export async function findByHardness(req, res) {
     const woods = await prisma.wood.findMany({
       where: { hardness: hardness },
     });
-    if (!woods.length) {
-      return res.status(404).json({ error: "Wood not found" });
-    }
     res.json(woods);
   } catch (error) {
     console.error(error);
