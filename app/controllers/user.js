@@ -23,7 +23,7 @@ export async function signup(req, res) {
     res.status(201).json({ message: "User created successfully", user });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: error.message || "Internal server error" });
   }
 }
 

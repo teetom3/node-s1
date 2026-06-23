@@ -1,8 +1,8 @@
 import express from "express";
+import { woods } from "../controllers/wood.js";
+
 const router = express();
 
-router.get("/", function (req, res) {
-  res.send("List of woods");
-});
+router.get("/", woods);
 
 export default router;
