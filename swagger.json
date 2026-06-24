@@ -12,6 +12,18 @@
     }
   ],
   "components": {
+    "parameters": {
+      "AuthorizationHeader": {
+        "name": "Authorization",
+        "in": "header",
+        "required": true,
+        "description": "Jeton d'authentification JWT au format : Bearer <token>",
+        "schema": {
+          "type": "string",
+          "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+      }
+    },
     "securitySchemes": {
       "BearerAuth": {
         "type": "http",
@@ -100,10 +112,12 @@
                 "properties": {
                   "self": {
                     "type": "string",
+                    "description": "Lien vers cette essence de bois (valeur dynamique basée sur l'id)",
                     "example": "http://localhost:5000/api/woods/1"
                   },
                   "sameHardness": {
                     "type": "string",
+                    "description": "Lien vers toutes les essences ayant la même dureté que ce bois (valeur dynamique basée sur le champ hardness)",
                     "example": "http://localhost:5000/api/woods/hardness/tender"
                   }
                 },
@@ -132,6 +146,9 @@
         "summary": "Récupérer toutes les essences de bois",
         "tags": ["Woods"],
         "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/AuthorizationHeader" }
+        ],
         "responses": {
           "200": {
             "description": "Collection de bois récupérée avec succès",
@@ -158,6 +175,9 @@
         "summary": "Créer une nouvelle essence de bois",
         "tags": ["Woods"],
         "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          { "$ref": "#/components/parameters/AuthorizationHeader" }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -215,6 +235,7 @@
         "tags": ["Woods"],
         "security": [{ "BearerAuth": [] }],
         "parameters": [
+          { "$ref": "#/components/parameters/AuthorizationHeader" },
           {
             "name": "hardness",
             "in": "path",

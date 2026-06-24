@@ -1,6 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../../app.js";
+import { promisify } from "node:util";
+
+const signAsync = promisify(jwt.sign);
 
 const SALT_ROUNDS = 10;
 
@@ -46,7 +49,7 @@ export async function login(req, res) {
       return res.status(401).json({ error: "Invalid email or password" });
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+    const token = await signAsync({ userId: user.id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
 
