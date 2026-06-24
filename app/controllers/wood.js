@@ -13,12 +13,14 @@ function addLinks(wood, req) {
 
 export async function create(req, res) {
   try {
-    const pathname = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+    const image = req.file
+      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+      : null;
 
     const wood = await prisma.wood.create({
       data: {
         ...JSON.parse(req.body.datas),
-        image: pathname,
+        image,
       },
     });
     res.status(201).json(addLinks(wood, req));
