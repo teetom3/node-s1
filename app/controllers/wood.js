@@ -17,9 +17,11 @@ export async function create(req, res) {
       ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
       : null;
 
+    const datas = req.body.datas ? JSON.parse(req.body.datas) : req.body;
+
     const wood = await prisma.wood.create({
       data: {
-        ...JSON.parse(req.body.datas),
+        ...datas,
         image,
       },
     });
